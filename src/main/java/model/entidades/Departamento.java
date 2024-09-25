@@ -1,4 +1,4 @@
-package model;
+package model.entidades;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,6 +11,10 @@ public class Departamento implements Serializable {
     public Departamento(int id, String nome){
         this.id = id;
         this.nome = nome;
+    }
+
+    public Departamento() {
+
     }
 
     public int getId() {

@@ -1,22 +1,28 @@
-package model;
+package model.entidades;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 public class Vendedor implements Serializable {
     private int id;
     private String nome;
     private String email;
-    private LocalDate aniversarioData;
+    private Double salario;
+    private Date aniversarioData;
     private Departamento departamento;
 
-    public Vendedor(int id, String nome, String email, LocalDate aniversarioData, Departamento departamento) {
+    public Vendedor(int id, String nome, String email, Date aniversarioData, Departamento departamento) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.aniversarioData = aniversarioData;
         this.departamento = departamento;
+    }
+
+    public Vendedor() {
+
     }
 
     public int getId() {
@@ -35,6 +41,14 @@ public class Vendedor implements Serializable {
         this.nome = nome;
     }
 
+    public Double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(Double salario) {
+        this.salario = salario;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -43,12 +57,20 @@ public class Vendedor implements Serializable {
         this.email = email;
     }
 
-    public LocalDate getAniversarioData() {
+    public Date getAniversarioData() {
         return aniversarioData;
     }
 
-    public void setAniversarioData(LocalDate aniversarioData) {
+    public void setAniversarioData(Date aniversarioData) {
         this.aniversarioData = aniversarioData;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
 
     @Override
