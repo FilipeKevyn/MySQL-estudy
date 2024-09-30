@@ -88,8 +88,7 @@ public class Vendedor implements Serializable {
 
     @Override
     public String toString() {
-        return "id=" + id +
-                ", nome='" + nome + '\'' +
-                '}';
+        return "Id = " + id +
+                ",\nNome = " + nome;
     }
 }
