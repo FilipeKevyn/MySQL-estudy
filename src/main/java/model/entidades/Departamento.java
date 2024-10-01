@@ -5,10 +5,10 @@ import java.util.Objects;
 
 public class Departamento implements Serializable {
     private static long serialVersionUID = 1L;
-    private int id;
+    private Integer id;
     private String nome;
 
-    public Departamento(int id, String nome){
+    public Departamento(Integer id, String nome){
         this.id = id;
         this.nome = nome;
     }
@@ -21,7 +21,7 @@ public class Departamento implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

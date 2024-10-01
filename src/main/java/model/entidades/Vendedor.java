@@ -6,18 +6,19 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Vendedor implements Serializable {
-    private int id;
+    private Integer id;
     private String nome;
     private String email;
     private Double salario;
     private Date aniversarioData;
     private Departamento departamento;
 
-    public Vendedor(int id, String nome, String email, Date aniversarioData, Departamento departamento) {
+    public Vendedor(Integer id, String nome, String email, Date aniversarioData, Double salario, Departamento departamento) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.aniversarioData = aniversarioData;
+        this.salario = salario;
         this.departamento = departamento;
     }
 

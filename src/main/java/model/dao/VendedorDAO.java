@@ -19,17 +19,79 @@ public class VendedorDAO implements DAO<Vendedor>{
     }
     @Override
     public void inserir(Vendedor obj) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+            st = conn.prepareStatement("INSERT INTO seller " +
+                    "(Name, Email, BirthDate, BaseSalary, DepartmentID) " +
+                    "VALUES " +
+                    "(?, ?, ?, ?, ?)"
+                    , Statement.RETURN_GENERATED_KEYS);
+            st.setString(1, obj.getNome());
+            st.setString(2, obj.getEmail());
+            st.setDate(3, new Date(obj.getAniversarioData().getTime()));
+            st.setDouble(4, obj.getSalario());
+            st.setInt(5, obj.getDepartamento().getId());
+
+            int linhasAfetadas = st.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                rs = st.getGeneratedKeys();
+                if (rs.next()){
+                    int id = rs.getInt(1);
+                    obj.setId(id);
+                }
+            }
+
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
 
     }
 
     @Override
     public void atualizar(Vendedor obj) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement("UPDATE seller " +
+                    "SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? " +
+                    "WHERE Id = ?");
+            st.setString(1, obj.getNome());
+            st.setString(2, obj.getEmail());
+            st.setDate(3, new Date(obj.getAniversarioData().getTime()));
+            st.setDouble(4, obj.getSalario());
+            st.setInt(5, obj.getDepartamento().getId());
+            st.setInt(6, obj.getId());
+
+            st.executeUpdate();
+        } catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+        }
 
     }
 
     @Override
     public void deletarById(Integer id) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement("DELETE FROM seller WHERE Id = ?");
 
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override
@@ -153,6 +215,7 @@ public class VendedorDAO implements DAO<Vendedor>{
         Vendedor vendedor = new Vendedor();
         vendedor.setId(rs.getInt("Id"));
         vendedor.setNome(rs.getString("Name"));
+        vendedor.setEmail(rs.getString("Email"));
         vendedor.setSalario(rs.getDouble("BaseSalary"));
         vendedor.setAniversarioData(rs.getDate("BirthDate"));
         vendedor.setDepartamento(departamento);

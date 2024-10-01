@@ -1,29 +1,29 @@
 package application;
 
-import db.DB;
 import model.dao.DAOFactory;
-import model.dao.VendedorDAO;
+import model.dao.DepartamentoDAO;
 import model.entidades.Departamento;
-import model.entidades.Vendedor;
-
-import java.sql.Connection;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        VendedorDAO vendedorDAO = DAOFactory.criarVendedorDAO();
+        DepartamentoDAO departamentoDAO = DAOFactory.criarDepartamentoDAO();
 
-        System.out.println("=== TEST 1: Vendedor encontrado por Id ===");
-        Vendedor vendedor = vendedorDAO.encontrarById(1);
-        System.out.println(vendedor);
+//        System.out.println("====== TESTE - INSERIR ======");
+//        Departamento departamento = new Departamento(null, "Celular");
+//        departamentoDAO.inserir(departamento);
+//        System.out.println(departamento.getId() + " Departamento adicionado");
 
-        System.out.println("\n=== TEST 2: Vendedor encontrado por Id ===");
-        Departamento departamento = new Departamento(2, null);
-        List<Vendedor> vendedorList = vendedorDAO.encontrarPorDep(departamento);
-        vendedorList.stream().forEach(System.out::println);
+//          System.out.println("====== TESTE - ATUALIZAR ======");
+//          Departamento departamento = departamentoDAO.encontrarById(3);
+//          departamento.setNome("Roupas");
+//          departamentoDAO.atualizar(departamento);
+//          System.out.println(departamento.getId() + " Departamento atualizado");
 
-        System.out.println("\n=== TEST 1: Encontrar todos os vendedores ===");
-        List<Vendedor> vendedorList2 = vendedorDAO.encontrarTodos();
-        vendedorList2.stream().forEach(System.out::println);
+//        System.out.println("====== TESTE - DELETAR - ENCONTRAR POR ID ======");
+//        departamentoDAO.deletarById(7);
+//        System.out.println("Departamento Deletado");
+
+        System.out.println("====== TESTE - ENCONTRAR TODOS ======");
+        System.out.println(departamentoDAO.encontrarTodos());
     }
 }
